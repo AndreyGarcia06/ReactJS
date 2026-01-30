@@ -7,15 +7,85 @@ h1 {
 }
 
 .encabezado {
-    background-color: aliceblue;
+    width: 100%;
+    display: flex;
 }
 
-.logo img {
-    width: 100px;
-    height: 100px;
+.logoDiv {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
 }
 
-.redes ul li img {
+.logoDiv img {
+    width: 150px;
+}
+
+.redesDiv ul li img {
     width: 50px;
     height: 50px;
+}
+
+.menuDiv {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menuDiv ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: darkcyan;
+    padding: 20px;
+    border-radius: 30px;
+}
+
+.redesDiv {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.redesDiv ul {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+}
+
+.redesDiv ul li img {
+    width: 50px;
+    height: auto;
+    display: flex;
+    transform: scale(1);
+    transition: all 0.1s ease;
+    
+}
+
+.redesDiv ul li img:hover {
+    transform: scale(1.5);
+    padding-inline: 10px;
+
+}
+
+.menuDiv ul li a {
+    text-decoration: none;
+    color: white;
+    transition: all 0.1s ease;
+    transform: scale(1);
+}
+
+.menuDiv ul li a:hover {
+    background-color: rgb(170, 253, 239);
+    padding: 10px 5px;
+    transform: scale(1.5);
+    border-radius: 30PX;
+    color: darkcyan;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 50%);
 }
