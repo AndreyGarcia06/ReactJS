@@ -1,0 +1,34 @@
+.ContenedorTextImg {
+    background: linear-gradient(rgba(243, 153, 27, 0.8), rgba(243, 153, 27, 0.8)),
+    url(public/fondoCripto.png);
+    width: 90%;
+    height: 300px;
+    display: flex;
+    margin: 0 auto;
+    border-radius: 25px;
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 100px;
+}
+
+.TextoTitulo {
+    color: white;
+    font-size: 48pt;
+    text-shadow: 0px 3px 3px rgba(0, 0, 0, 0.7);
+    text-align: center;
+}
+
+.TextoNormal {
+    color: white;
+    text-align: center;
+    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.7);
+    font-size: 18pt;
+}
+
+p {
+    margin: 20px;
+}
+
+.ContenedorTextImg h3 {
+    margin: 0;
+}

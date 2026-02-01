@@ -16,7 +16,7 @@ function Tarjeta () {
     return (
         <div className = "tarjeta">
             <img src = {byc} alt = "Coso de bitcoin" />
-            <h3> El bitcoin y su primo</h3>
+            <h3> El bitcoin y sus primos</h3>
             <p> Son primos desde hace uff</p>
             <a href = "#"> Ver más</a>
         </div>

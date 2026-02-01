@@ -1,20 +1,18 @@
 import ContenedorTarjeta from "./contenedorTarjetas";
+import ContenedorTextImg from "./ContenedorTextImg";
 import Encabezado from "./Encabezado";
+import PiePagina from "./PiePagina";
 
-function app () {
+function App () {
   
   return (
     <div>
       <Encabezado />
       <ContenedorTarjeta/>
-      <h1> 5A EVND </h1>
-      <h2> Profesor: </h2>
-      <h3> M.T.I Ricardo Luna Santos </h3>
-      <UserComponent />
-      <ProfileComponent />
-      <FeedComponent />
+      <ContenedorTextImg/>
+      <PiePagina/>
     </div>
-)
+  )
 }
 
 function UserComponent() {
@@ -65,4 +63,4 @@ function FeedComponent() {
   )
 }
 
-export default app
+export default App
