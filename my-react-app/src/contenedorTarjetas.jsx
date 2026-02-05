@@ -4,20 +4,20 @@ import './contenedorTarjetas.css';
 function ContenedorTarjeta () {
     return ( 
         <div className = "contenedorTarjetas">
-            <Tarjeta />
-            <Tarjeta />
-            <Tarjeta />
-            <Tarjeta />
+            <Tarjeta titulo = "Bitcoin" descripcion = "La primera criptomoneda" />
+            <Tarjeta titulo = "DogueCoin" descripcion = "La criptomoneda de los memes" />
+            <Tarjeta titulo = "Ethereum" descripcion = "Plataforma para contratos inteligentes" />
+            <Tarjeta titulo = "XRP" descripcion = "Criptomoneda para pagos rápidos" />
         </div>
     )
 }
 
-function Tarjeta () {
+function Tarjeta (props) {
     return (
         <div className = "tarjeta">
             <img src = {byc} alt = "Coso de bitcoin" />
-            <h3> El bitcoin y sus primos</h3>
-            <p> Son primos desde hace uff</p>
+            <h3> {props.titulo}</h3>
+            <p> {props.descripcion}</p>
             <a href = "#"> Ver más</a>
         </div>
     )
