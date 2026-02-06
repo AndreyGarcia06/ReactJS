@@ -2,13 +2,14 @@ import ContenedorTarjeta from "./contenedorTarjetas";
 import ContenedorTextImg from "./ContenedorTextImg";
 import Encabezado from "./Encabezado";
 import PiePagina from "./PiePagina";
+import { useState } from "react"
 
 function App () {
-  
+  const [vista, setVista] = useState ("Inicio");
   return (
     <div>
-      <Encabezado />
-      <ContenedorTarjeta/>
+      <Encabezado cambiarVista = {setVista}/>
+      <ContenedorTarjeta vista = {vista}/>
       <ContenedorTextImg/>
       <PiePagina/>
     </div>

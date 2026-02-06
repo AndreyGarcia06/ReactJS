@@ -4,13 +4,14 @@ import face from "./assets/Redes/facebook.png";
 import insta from "./assets/Redes/instagram.png";
 import youtube from "./assets/Redes/youtube.png";
 import whats from "./assets/Redes/whatsapp.png";
+import PropTypes from 'prop-types';
 import "./Encabezado.css";
 
-function Encabezado() {
+function Encabezado({cambiarVista}) {
     return (
         <div className = "encabezado">
             <Logo />
-            <Menu />
+            <Menu cambiarVista = {cambiarVista}/>
             <Redes />
         </div>
     );
@@ -24,15 +25,16 @@ function Logo() {
     )
 }
 
-function Menu() {
+function Menu({cambiarVista}) {
     return (
         <div className = "menuDiv" >
             <ul>
-                <li><a href = "#"> Inicio </a></li>
-                <li><a href = "#"> Acerca de </a></li>
-                <li><a href = "#"> Productos </a></li>
-                <li><a href = "#"> Contactos </a></li>
-                <li><a href = "#"> Sucursales </a></li>
+                <li onClick = {() => cambiarVista ("Inicio")}> Inicio </li>
+                <li onClick = {() => cambiarVista ("AcercaDe")}> Acerca de </li>
+                <li onClick = {() => cambiarVista ("Productos")}> Productos </li>
+                <li onClick = {() => cambiarVista ("Galería")}> Galería </li>
+                <li onClick = {() => cambiarVista ("Contactos")}> Contactos </li>
+                <li onClick = {() => cambiarVista ("Sucursales")}> Sucursales </li>
             </ul>
         </div>
     )
@@ -50,5 +52,13 @@ function Redes() {
             </ul>
         </div>
     );
+}
+
+Encabezado.propTypes = {
+    cambiarVista: PropTypes.func.isRequired
+}
+
+Menu.propTypes = {
+    cambiarVista: PropTypes.func.isRequired
 }
 export default Encabezado

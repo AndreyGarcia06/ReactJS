@@ -38,7 +38,7 @@ h1 {
 .menuDiv ul {
     list-style: none;
     display: flex;
-    gap: 20px;
+    gap: 30px;
     font-size: 20px;
     font-weight: bold;
     background-color: rgb(243, 153, 27);
@@ -74,14 +74,14 @@ h1 {
 
 }
 
-.menuDiv ul li a {
+.menuDiv ul li {
     text-decoration: none;
     color: white;
     transition: all 0.1s ease;
     transform: scale(1);
 }
 
-.menuDiv ul li a:hover {
+.menuDiv ul li:hover {
     background-color: rgb(255, 255, 255);
     padding: 10px 5px;
     transform: scale(1.5);
