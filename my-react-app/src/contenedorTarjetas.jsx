@@ -2,11 +2,20 @@ import byc from "./assets/TBit.jpg";
 import PropTypes from 'prop-types';
 import './contenedorTarjetas.css';
 import AcercaDe from "./AcercaDe";
+import Productos from "./Productos";
+import Galeria from "./Galeria";
+import Contactos from "./Contactos";
+import Sucursales from "./Sucursales";
 
 function ContenedorTarjeta ({vista}) {
     const vistas = {
         "Inicio": <Inicio />,
         "AcercaDe": <AcercaDe />,
+        "Productos": <Productos />,
+        "Galeria": <Galeria />,
+        "Contactos": <Contactos />,
+        "Sucursales": <Sucursales />,
+
     }
     return ( 
         <div className = "contenedorTarjetas">
