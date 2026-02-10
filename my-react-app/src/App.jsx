@@ -16,6 +16,7 @@ function App () {
   )
 }
 
+/*
 function UserComponent() {
   const nombre = 'Andrey';
   const apellidos = 'Ortega Garcia';
@@ -63,5 +64,5 @@ function FeedComponent() {
     </>
   )
 }
-
+*/
 export default App

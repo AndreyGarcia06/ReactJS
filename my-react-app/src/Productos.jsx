@@ -1,7 +1,9 @@
+import "./Productos.css";
+
 function Productos () {
     return (
         <div className = "productosDiv">
-            <h2> Aqui habrá info del productos we</h2>
+            <h2 className = "Titulo"> Productos de las criptos</h2>
         </div>
     )
 }
