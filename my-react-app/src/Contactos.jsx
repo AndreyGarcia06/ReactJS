@@ -1,3 +1,4 @@
+import "./Contactos.css";
 function Contactos () {
     return (
         <div className = "contactosDiv">

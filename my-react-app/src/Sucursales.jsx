@@ -1,3 +1,5 @@
+import "./Sucursales.css";
+
 function Sucursales () {
     return (
         <div className = "sucursalesDiv">
