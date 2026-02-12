@@ -2,7 +2,7 @@
     background: linear-gradient(rgba(243, 153, 27, 0.8), rgba(243, 153, 27, 0.8)),
     url(public/fondoCripto.png);
     width: 90%;
-    height: 300px;
+    height: auto;
     display: flex;
     margin: 0 auto;
     border-radius: 25px;

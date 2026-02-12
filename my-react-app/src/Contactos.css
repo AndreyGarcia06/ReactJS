@@ -1,0 +1,102 @@
+.contactosDiv {
+    width: 100%;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contactosDiv h2 {
+    font-size: 32px;
+    color: rgb(243, 153, 27);
+    margin-bottom: 30px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 15px 30px;
+    border-radius: 15px;
+    display: inline-block;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.formularioContacto {
+    width: 60%;
+    max-width: 600px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.campoFormulario {
+    margin-bottom: 20px;
+}
+
+.campoFormulario label {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    color: rgb(93, 172, 168);
+    margin-bottom: 8px;
+}
+
+.campoFormulario input,
+.campoFormulario textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.campoFormulario input:focus,
+.campoFormulario textarea:focus {
+    outline: none;
+    border-color: rgb(243, 153, 27);
+}
+
+.campoFormulario textarea {
+    resize: vertical;
+    font-family: inherit;
+}
+
+.botonesFormulario {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.btnEnviar,
+.btnLimpiar {
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btnEnviar {
+    background-color: rgb(243, 153, 27);
+    color: white;
+}
+
+.btnEnviar:hover {
+    background-color: rgb(220, 135, 15);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(243, 153, 27, 0.4);
+}
+
+.btnLimpiar {
+    background-color: rgb(93, 172, 168);
+    color: white;
+}
+
+.btnLimpiar:hover {
+    background-color: rgb(75, 145, 142);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(93, 172, 168, 0.4);
+}

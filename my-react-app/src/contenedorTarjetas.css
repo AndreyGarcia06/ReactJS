@@ -1,6 +1,7 @@
 .contenedorTarjetas {
     width: 90%;
-    height: 400px;
+    min-height: 400px;
+    height: auto;
     border-radius: 25px;
     margin: 0 auto;
     align-items: center;

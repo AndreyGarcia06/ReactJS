@@ -51,12 +51,6 @@ const productos = [
     descripcion: "Blockchain sostenible y escalable.",
     imagen: "https://statics.forbesargentina.com/2021/12/61c0dd71ea674.png",
     link: "https://polkadot.com"
-  },
-  {
-    nombre: "Bitcoin",
-    descripcion: "La primera criptomoneda.",
-    imagen: "https://www.criptonoticias.com/wp-content/uploads/2026/02/bitcoin-precio-comprar-caida.jpg",
-    link: "https://bitcoin.org/es/"
   }
 ];
 
