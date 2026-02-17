@@ -2,6 +2,7 @@ import ContenedorTarjeta from "./contenedorTarjetas";
 import ContenedorTextImg from "./ContenedorTextImg";
 import Encabezado from "./Encabezado";
 import PiePagina from "./PiePagina";
+import MapaRutas from "./MapaRutas";
 import { useState } from "react"
 
 function App () {
@@ -10,6 +11,7 @@ function App () {
     <div>
       <Encabezado cambiarVista = {setVista}/>
       <ContenedorTarjeta vista = {vista}/>
+      <MapaRutas />
       <ContenedorTextImg/>
       <PiePagina/>
     </div>

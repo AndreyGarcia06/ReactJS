@@ -1,0 +1,15 @@
+.mapaRutasContainer {
+  margin: 18px 0;
+  padding: 8px;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+.mapaRutasContainer h2 {
+  font-size: 1rem;
+  margin: 8px 12px;
+}
+.mapaRutasContainer .gm-style {
+  border-radius: 6px;
+  overflow: hidden;
+}
