@@ -1,0 +1,70 @@
+.usuariosDiv {
+  width: 90%;
+  margin: 0 auto;
+  border-radius: 25px;
+  padding: 20px;
+  background: white;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+}
+
+.usuariosDiv table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 15px;
+  overflow: hidden;
+  background: white;
+}
+
+.usuariosDiv th {
+  background-color: rgb(243, 153, 27);
+  color: white;
+  text-align: left;
+  padding: 12px 10px;
+  font-size: 0.9rem;
+}
+
+.usuariosDiv td {
+  padding: 12px 10px;
+  font-size: 0.9rem;
+  color: #333333;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.usuariosDiv tr:nth-child(even) td {
+  background-color: #fff8ed;
+}
+
+.usuariosDiv tr:hover td {
+  background-color: #ffe0b2;
+}
+
+.usuariosDiv td:first-child {
+  font-weight: bold;
+  color: #f7941d;
+}
+
+.usuariosDiv button {
+  background-color: rgb(243, 153, 27);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 10px;
+  margin-right: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.usuariosDiv button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 1024px) {
+  .usuariosDiv table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}

@@ -6,6 +6,8 @@ import Productos from "./Productos";
 import Galeria from "./Galeria";
 import Contactos from "./Contactos";
 import Sucursales from "./Sucursales";
+import Usuarios from "./Usuarios";
+import Carrito from "./Carrito";
 
 function ContenedorTarjeta ({vista}) {
     const vistas = {
@@ -15,6 +17,8 @@ function ContenedorTarjeta ({vista}) {
         "Galeria": <Galeria />,
         "Contactos": <Contactos />,
         "Sucursales": <Sucursales />,
+        "Usuarios": <Usuarios />,
+        "Carrito": <Carrito />
 
     }
     return ( 
