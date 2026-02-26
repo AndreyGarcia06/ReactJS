@@ -1,6 +1,7 @@
 import "./Productos.css";
 import {useEffect, useState} from 'react';
 import api from './Services/api';
+import RegistrarProducto from "./RegistrarProducto";
 
 function Productos () {
   const [productos, setProductos] = useState([]);
@@ -24,6 +25,7 @@ function Productos () {
 
     return (
         <div className = "productosDiv">
+          <RegistrarProducto />
           <h3> Catalogo de coso </h3>
           {productos.map((producto) => (
             <div className = "tarjeta">
@@ -31,6 +33,10 @@ function Productos () {
                 <div className = "Titulo"> {producto.title} </div>
                 <div className = "precio"> {producto.price} </div>
                 <img src = {producto.image} />
+            </div>
+            <div className = "Acciones">
+                <button className = "aggCar"> Agregar al carrito </button>
+                <button className = "borrarCar"> Eliminar </button>
             </div>
             </div>
           ))}
