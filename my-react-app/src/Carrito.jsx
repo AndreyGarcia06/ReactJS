@@ -24,7 +24,7 @@ function Carrito () {
 
     return (
         <div className = "productosDiv">
-          <h3> Carrito </h3>
+          <h2> Carrito </h2>
           {carrito.map((carro) => (
             <div className = "tarjeta">
               <div>
