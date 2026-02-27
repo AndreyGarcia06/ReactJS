@@ -35,7 +35,7 @@ function Carrito () {
                 {carro.products.map((item, index) => (
                     <li key = {index}>
                     <div className = "Id producto"> Id producto: {item.productId} </div>
-                    <div className = "Cantidad de items"> Cantidad de items: {item.quantity} </div>
+                    <div className = "Cantidad de items"> Cantidad de items: {item.quantity} </div><button> x </button>
                     </li>
                 ))}
             </div>

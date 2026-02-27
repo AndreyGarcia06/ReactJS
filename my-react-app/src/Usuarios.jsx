@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import api from './Services/api';
 import './Usuarios.css';
+import RegistrarUsuario from './RegistrarUsuario';
 
 function Usuarios () {
   const [usuarios, setUsuarios] = useState([]);
@@ -23,8 +24,10 @@ function Usuarios () {
   if(cargando) return <p> Cargando usuarios ...</p>
 
     return (
-        <div className = "usuariosDiv">
-          <h3 className="usuariosTitulo">Usuarios</h3>
+        <>
+          <RegistrarUsuario />
+          <div className = "usuariosDiv">
+            <h3 className="usuariosTitulo">Usuarios</h3>
           <table className="usuariosTabla">
             <thead>
               <tr>
@@ -58,7 +61,8 @@ function Usuarios () {
               ))}
             </tbody>
           </table>
-        </div>
+          </div>
+        </>
     )
 }
 

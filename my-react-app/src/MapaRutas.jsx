@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { GoogleMap, useJsApiLoader, Marker, Polyline } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import './MapaRutas.css';
 
 const containerStyle = {
@@ -74,15 +74,6 @@ function MapaRutas() {
     sucursalIcon = makeSucursalIcon;
   }
 
-  const endpointIcon = (color) => (typeof window !== 'undefined' && window.google && window.google.maps) ? ({
-    path: window.google.maps.SymbolPath.CIRCLE,
-    scale: 5,
-    fillColor: color,
-    fillOpacity: 1,
-    strokeWeight: 1,
-    strokeColor: '#ffffff'
-  }) : null;
-
   return (
     <div className="mapaRutasContainer">
       <h2>Rutas a sucursales desde tu ubicación</h2>
@@ -94,26 +85,6 @@ function MapaRutas() {
             position={{ lat: s.lat, lng: s.lng }}
             icon={typeof sucursalIcon === 'function' ? sucursalIcon(colors[(i+1) % colors.length]) : null}
             title={s.name}
-          />
-        ))}
-
-        {/* Dibujar línea recta (a vuelo de pájaro) entre ubicacion y cada sucursal */}
-        {ubicacion && sucursales.map((s, i) => (
-          <Polyline
-            key={`route-${i}`}
-            path={[{ lat: ubicacion.lat, lng: ubicacion.lng }, { lat: s.lat, lng: s.lng }]}
-            options={{ strokeColor: colors[(i+1) % colors.length], strokeWeight: 3, clickable: false }}
-          />
-        ))}
-
-        {/* Puntos finales de cada ruta (pequeños círculos) */}
-        {ubicacion && sucursales.map((s, i) => (
-          <Marker
-            key={`end-${i}`}
-            position={{ lat: s.lat, lng: s.lng }}
-            icon={endpointIcon(colors[(i+1) % colors.length])}
-            clickable={false}
-            zIndex={10}
           />
         ))}
       </GoogleMap>
