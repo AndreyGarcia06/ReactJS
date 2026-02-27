@@ -1,10 +1,46 @@
 import './RegistrarProducto.css';
+import {useState} from 'react';
+import api from './Services/api'
 
 function RegistrarProducto() {
+
+    const [productos, setProductos] = useState ({
+        title: '',
+        price: '',
+        description: '',
+        category: '',
+        image: ''
+    });
+
+    const handleChange = (e) => {
+        setProductos ({
+            ...productos,
+            [e.target.name]: e.target.value
+        });
+
+        const handleSubmit = (e) => {
+            e.preventDefault();
+            try {
+                const response = await api.post('/productos', productos);
+                setProductos(response.data);
+                alert ('Producto agregado exitosamente');
+                console.log(productos);
+                setProductos({
+                    title: '',
+                    price: '',
+                    description: '',
+                    category: '',
+                    image: ''
+                })
+            } catch (error) {
+                console.error('Error al registrar el producto:', error);
+            }
+        };
+
         return (
             <div className="registroDiv">
                 <h2>Registrar Producto</h2>
-                <form className="formularioRegistro">
+                <form onSubmit={handleSubmit} className="formularioRegistro">
                     <div className="campoFormulario">
                         <label> Nombre:</label>
                         <input type="text" id="nombre" name="nombre" required />
@@ -29,6 +65,6 @@ function RegistrarProducto() {
                 </form>
             </div>
         )
+    }
 }
-
 export default RegistrarProducto

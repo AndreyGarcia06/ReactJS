@@ -39,7 +39,9 @@ function Carrito () {
                     </li>
                 ))}
             </div>
+              <button> Eliminar todo </button>
             </div>
+
            
           ))}
         </div>
