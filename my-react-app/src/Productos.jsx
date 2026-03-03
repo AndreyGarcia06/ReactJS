@@ -6,18 +6,20 @@ import RegistrarProducto from "./RegistrarProducto";
 function Productos () {
   const [productos, setProductos] = useState([]);
   const [cargando, setCargando] = useState (true);
+  const [productoSeleccionado, setProductoSeleccionado] = useState(null);
+
+  const obtenerProductos = async () => {
+    try {
+      const response = await api.get ('/products');
+      setProductos(response.data);
+    }catch( error) {
+      console.error ('Error al obtener productos:', error);
+    }finally {
+      setCargando(false);
+    }
+  };
 
   useEffect(() => {
-    const obtenerProductos = async () => {
-      try {
-        const response = await api.get ('/products');
-        setProductos(response.data);
-      }catch( error) {
-        console.error ('Error al obtener productos:', error);
-      }finally {
-        setCargando(false);
-      }
-    };
     obtenerProductos();
   }, []);
 
@@ -25,8 +27,11 @@ function Productos () {
 
     return (
         <div className = "productosDiv">
-          <RegistrarProducto />
-          <h3> Catalogo de coso </h3>
+          <RegistrarProducto 
+          productoEditado={productoSeleccionado}
+          limpiarSeleccion={() => setProductoSeleccionado(null)}
+          onActualizacionExitosa={obtenerProductos}/>
+          <h3> Catalogo de productos </h3>
           {productos.map((producto) => (
             <div className = "tarjeta">
               <div key = {producto.id} >
@@ -36,7 +41,8 @@ function Productos () {
             </div>
             <div className = "Acciones">
                 <button className = "aggCar"> Agregar al carrito </button>
-                <button className = "borrarCar"> Eliminar </button>
+                <button className = "borrarCar" onClick={() => removeProducto(producto.id)}> Eliminar </button>
+                <button className = "editarCar" onClick={() => setProductoSeleccionado(producto)}> Editar </button>
             </div>
             </div>
           ))}

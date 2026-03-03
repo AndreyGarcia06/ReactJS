@@ -6,9 +6,8 @@ import RegistrarUsuario from './RegistrarUsuario';
 function Usuarios () {
   const [usuarios, setUsuarios] = useState([]);
   const [cargando, setCargando] = useState (true);
-
-  useEffect(() => {
-    const obtenerUsuarios = async () => {
+  const [usuarioSeleccionado, setUsuarioSeleccionado] = useState(null);
+  const obtenerUsuarios = async () => {
       try {
         const response = await api.get ('/users');
         setUsuarios(response.data);
@@ -18,6 +17,7 @@ function Usuarios () {
         setCargando(false);
       }
     };
+  useEffect(() => {
     obtenerUsuarios();
   }, []);
 
@@ -25,7 +25,10 @@ function Usuarios () {
 
     return (
         <>
-          <RegistrarUsuario />
+          <RegistrarUsuario
+          usuarioEditado={usuarioSeleccionado}
+          limpiarSeleccion={() => setUsuarioSeleccionado(null)}
+          onActualizacionExitosa={obtenerUsuarios} />
           <div className = "usuariosDiv">
             <h3 className="usuariosTitulo">Usuarios</h3>
           <table className="usuariosTabla">
@@ -53,8 +56,8 @@ function Usuarios () {
                     <td data-label="Teléfono"> {usuario.phone} </td>
                     <td data-label="Acciones">
                       <div className="usuariosAcciones">
-                        <button className="usuariosBtn danger"> Eliminar</button>
-                        <button className="usuariosBtn"> Editar </button>
+                        <button className="usuariosBtn danger" onClick = {() => removeUsuario(usuario.id)}> Eliminar </button>
+                        <button className="usuariosBtn" onClick={() => setUsuarioSeleccionado(usuario)}> Editar </button>
                       </div>
                     </td>
                 </tr>
