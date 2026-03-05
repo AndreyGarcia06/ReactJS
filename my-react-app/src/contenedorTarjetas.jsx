@@ -8,6 +8,7 @@ import Contactos from "./Contactos";
 import Sucursales from "./Sucursales";
 import Usuarios from "./Usuarios";
 import Carrito from "./Carrito";
+import Login from "./Login";
 
 function ContenedorTarjeta ({vista}) {
     const vistas = {
@@ -18,6 +19,7 @@ function ContenedorTarjeta ({vista}) {
         "Contactos": <Contactos />,
         "Sucursales": <Sucursales />,
         "Usuarios": <Usuarios />,
+        "Login": <Login />,
         "Carrito": <Carrito />
 
     }

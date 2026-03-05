@@ -1,0 +1,48 @@
+.loginDiv {
+    width: 100%;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loginDiv h2 {
+    font-size: 28px;
+    color: #ffffff;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.loginFormulario {
+    width: 90%;
+    max-width: 600px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 25px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.loginAcciones {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btnLoginSecundario {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid rgb(243, 153, 27);
+    border-radius: 10px;
+    background-color: white;
+    color: rgb(243, 153, 27);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btnLoginSecundario:hover {
+    background-color: rgb(243, 153, 27);
+    color: white;
+    transform: scale(1.02);
+}
