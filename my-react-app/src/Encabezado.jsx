@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import "./Encabezado.css";
 import Clima from "./clima.jsx";
 import "./clima.css";
+import { useAuth } from "./AuthContext.jsx";
 
 function Encabezado({cambiarVista}) {
     return (
@@ -28,6 +29,7 @@ function Logo() {
 }
 
 function Menu({cambiarVista}) {
+    const {isLoggedIn, logout} = useAuth();
     return (
         <div className = "menuDiv" >
             <ul>
@@ -37,9 +39,15 @@ function Menu({cambiarVista}) {
                 <li onClick = {() => cambiarVista ("Galeria")}> Galería </li>
                 <li onClick = {() => cambiarVista ("Contactos")}> Contactos </li>
                 <li onClick = {() => cambiarVista ("Sucursales")}> Sucursales </li>
-                <li onClick = {() => cambiarVista ("Usuarios")}> Usuarios </li>
+                {isLoggedIn ? (
+                    <>
+                    <li onClick = {() => cambiarVista ("Usuarios")}> Usuarios </li>
+                    <li onClick = {() => cambiarVista ("Carrito")}> Carrito </li>
+                    <li> Cerrar sesión </li>
+                    </>):
+                    (
                 <li onClick = {() => cambiarVista ("Login")}> Login </li>
-                <li onClick = {() => cambiarVista ("Carrito")}> Carrito </li>
+                )}
             </ul>
             <Clima />
         </div>

@@ -4,13 +4,16 @@ import Encabezado from "./Encabezado";
 import PiePagina from "./PiePagina";
 import MapaRutas from "./MapaRutas";
 import { useState } from "react"
+import { AuthProvider } from "./AuthContext.jsx";
 
 function App () {
   const [vista, setVista] = useState ("Inicio");
   return (
     <div>
-      <Encabezado cambiarVista = {setVista}/>
-      <ContenedorTarjeta vista = {vista}/>
+      <AuthProvider>
+        <Encabezado cambiarVista = {setVista}/>
+        <ContenedorTarjeta vista = {vista}/>
+      </AuthProvider>
       <MapaRutas />
       <ContenedorTextImg/>
       <PiePagina/>
