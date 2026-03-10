@@ -1,8 +1,11 @@
 import "./Login.css";
 import { useState } from "react";
 import api from "./Services/api";
+import { useAuth } from "./AuthContext";
+
 
 function Login() {
+    const {login} = useAuth();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -37,11 +40,13 @@ function Login() {
 
             const token = response?.data?.token || crearTokenSimulado();
             console.log("Token generado:", token);
+            login(token);
             alert("Bienvenido");
         } catch (error) {
             console.error("Error al iniciar sesión:", error);
             const token = crearTokenSimulado();
             console.log("Token generado:", token);
+            login(token);
             alert("Bienvenido");
         }
     };
