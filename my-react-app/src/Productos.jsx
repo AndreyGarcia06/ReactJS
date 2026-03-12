@@ -2,8 +2,10 @@ import "./Productos.css";
 import {useEffect, useState} from 'react';
 import api from './Services/api';
 import RegistrarProducto from "./RegistrarProducto";
+import { useAuth } from "./AuthContext";
 
 function Productos () {
+  const { isLoggedIn } = useAuth();
   const [productos, setProductos] = useState([]);
   const [cargando, setCargando] = useState (true);
   const [productoSeleccionado, setProductoSeleccionado] = useState(null);
@@ -27,10 +29,12 @@ function Productos () {
 
     return (
         <div className = "productosDiv">
-          <RegistrarProducto 
-          productoEditado={productoSeleccionado}
-          limpiarSeleccion={() => setProductoSeleccionado(null)}
-          onActualizacionExitosa={obtenerProductos}/>
+          {isLoggedIn && (
+            <RegistrarProducto 
+            productoEditado={productoSeleccionado}
+            limpiarSeleccion={() => setProductoSeleccionado(null)}
+            onActualizacionExitosa={obtenerProductos}/>
+          )}
           <h3> Catalogo de productos </h3>
           {productos.map((producto) => (
             <div className = "tarjeta">
@@ -41,8 +45,12 @@ function Productos () {
             </div>
             <div className = "Acciones">
                 <button className = "aggCar"> Agregar al carrito </button>
-                <button className = "borrarCar" onClick={() => removeProducto(producto.id)}> Eliminar </button>
-                <button className = "editarCar" onClick={() => setProductoSeleccionado(producto)}> Editar </button>
+                {isLoggedIn && (
+                  <>
+                    <button className = "borrarCar" onClick={() => removeProducto(producto.id)}> Eliminar </button>
+                    <button className = "editarCar" onClick={() => setProductoSeleccionado(producto)}> Editar </button>
+                  </>
+                )}
             </div>
             </div>
           ))}

@@ -9,8 +9,13 @@ import Sucursales from "./Sucursales";
 import Usuarios from "./Usuarios";
 import Carrito from "./Carrito";
 import Login from "./Login";
+import RegistrarUsuario from "./RegistrarUsuario";
+import Categorias from "./Categorias";
+import { useAuth } from "./AuthContext";
 
-function ContenedorTarjeta ({vista}) {
+function ContenedorTarjeta ({vista, cambiarVista}) {
+    const { isLoggedIn } = useAuth();
+
     const vistas = {
         "Inicio": <Inicio />,
         "AcercaDe": <AcercaDe />,
@@ -19,7 +24,9 @@ function ContenedorTarjeta ({vista}) {
         "Contactos": <Contactos />,
         "Sucursales": <Sucursales />,
         "Usuarios": <Usuarios />,
-        "Login": <Login />,
+        "Categorias": isLoggedIn ? <Categorias /> : <Inicio />,
+        "Login": <Login cambiarVista={cambiarVista} />,
+        "RegistrarUsuario": <RegistrarUsuario />,
         "Carrito": <Carrito />
 
     }
@@ -53,7 +60,8 @@ function Tarjeta (props) {
 }
 
 ContenedorTarjeta.propTypes = {
-    vista: PropTypes.string.isRequired
+    vista: PropTypes.string.isRequired,
+    cambiarVista: PropTypes.func
 };
 
 export default ContenedorTarjeta

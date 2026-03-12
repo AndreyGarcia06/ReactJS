@@ -4,7 +4,7 @@ import api from "./Services/api";
 import { useAuth } from "./AuthContext";
 
 
-function Login() {
+function Login({cambiarVista}) {
     const {login} = useAuth();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -82,7 +82,7 @@ function Login() {
                 <button type="submit" className="btnRegistro">Registrar</button>
 
                 <div className="loginAcciones">
-                    <button type="button" className="btnLoginSecundario">Crear cuenta</button>
+                    <button type="button" className="btnLoginSecundario" onClick={() => cambiarVista && cambiarVista("RegistrarUsuario")}>Crear cuenta</button>
                     <button type="button" className="btnLoginSecundario">Recuperar contraseña</button>
                 </div>
             </form>
