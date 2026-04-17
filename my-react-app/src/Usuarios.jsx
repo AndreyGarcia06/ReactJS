@@ -7,16 +7,49 @@ function Usuarios () {
   const [usuarios, setUsuarios] = useState([]);
   const [cargando, setCargando] = useState (true);
   const [usuarioSeleccionado, setUsuarioSeleccionado] = useState(null);
+
+  const formatearFecha = (valor) => {
+    if (!valor) return '—';
+    const fecha = new Date(valor);
+    if (Number.isNaN(fecha.getTime())) return valor;
+    return fecha.toLocaleDateString();
+  };
+
   const obtenerUsuarios = async () => {
       try {
-        const response = await api.get ('/users');
-        setUsuarios(response.data);
+        let response;
+        try {
+          response = await api.get('/usuarios');
+        } catch {
+          response = await api.get('/users');
+        }
+        setUsuarios(Array.isArray(response.data) ? response.data : []);
       }catch( error) {
         console.error ('Error al obtener usuario:', error);
       }finally {
         setCargando(false);
       }
     };
+
+  const removeUsuario = async (id) => {
+    if (!window.confirm('¿Seguro que quieres eliminar este usuario?')) return;
+
+    try {
+      try {
+        await api.delete(`/usuarios/${id}`);
+      } catch {
+        await api.delete(`/users/${id}`);
+      }
+      setUsuarios((prev) => prev.filter((usuario) => usuario.id !== id));
+      if (usuarioSeleccionado?.id === id) {
+        setUsuarioSeleccionado(null);
+      }
+    } catch (error) {
+      console.error('Error al eliminar usuario:', error);
+      alert('No se pudo eliminar el usuario');
+    }
+  };
+
   useEffect(() => {
     obtenerUsuarios();
   }, []);
@@ -35,12 +68,13 @@ function Usuarios () {
             <thead>
               <tr>
                   <th> Id </th>
-                  <th> Email </th>
-                  <th> Nombre de usuario </th>
-                  <th> Contraseña </th>
                   <th> Nombre </th>
-                  <th> Apellido </th>
-                  <th> Teléfono </th>
+                  <th> Dirección </th>
+                  <th> Telefono </th>
+                  <th> Email </th>
+                  <th> Password </th>
+                  <th> Rol </th>
+                  <th> Fecha de registro </th>
                   <th> Acciones </th>
               </tr>
             </thead>
@@ -48,12 +82,13 @@ function Usuarios () {
               {usuarios.map((usuario) => (
                 <tr key={usuario.id}>
                     <td className="col-id" data-label="Id"> {usuario.id} </td>
-                    <td className="col-email" data-label="Email"> {usuario.email} </td>
-                    <td data-label="Usuario"> {usuario.username} </td>
-                    <td data-label="Contraseña"> {usuario.password} </td>
-                    <td data-label="Nombre"> {usuario.name.firstname} </td>
-                    <td data-label="Apellido"> {usuario.name.lastname} </td>
-                    <td data-label="Teléfono"> {usuario.phone} </td>
+                    <td data-label="Nombre"> {usuario.nombre || `${usuario?.name?.firstname || ''} ${usuario?.name?.lastname || ''}`.trim() || usuario.username || '—'} </td>
+                    <td data-label="Dirección"> {usuario.direccion || [usuario?.address?.street, usuario?.address?.number, usuario?.address?.city].filter(Boolean).join(', ') || '—'} </td>
+                    <td data-label="Telefono"> {usuario.telefono || usuario.phone || '—'} </td>
+                    <td className="col-email" data-label="Email"> {usuario.email || '—'} </td>
+                    <td data-label="Password"> {usuario.password || '—'} </td>
+                    <td data-label="Rol"> {usuario.rol || usuario.role || 'usuario'} </td>
+                    <td data-label="Fecha de registro"> {formatearFecha(usuario.fechaRegistro || usuario.createdAt)} </td>
                     <td data-label="Acciones">
                       <div className="usuariosAcciones">
                         <button className="usuariosBtn danger" onClick = {() => removeUsuario(usuario.id)}> Eliminar </button>

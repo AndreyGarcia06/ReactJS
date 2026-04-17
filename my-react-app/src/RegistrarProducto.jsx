@@ -4,48 +4,65 @@ import api from './Services/api'
 
 function RegistrarProducto({productoEditado, limpiarSeleccion, onActualizacionExitosa}) {
     
-    const [title, setTitle] = useState('');
-    const [price, setPrice] = useState('');
-    const [description, setDescription] = useState('');
-    const [category, setCategory] = useState('');
-    const [image, setImage] = useState('');
+    const [nombre, setNombre] = useState('');
+    const [precio, setPrecio] = useState('');
+    const [descripcion, setDescripcion] = useState('');
+    const [categoria, setCategoria] = useState('');
+    const [imagen, setImagen] = useState('');
     
     useEffect(() => {
         if (productoEditado) {
-            setTitle(productoEditado.title);
-            setPrice(productoEditado.price);
-            setDescription(productoEditado.description);
-            setCategory(productoEditado.category);
-            setImage(productoEditado.image);
+            setNombre(productoEditado.nombre || productoEditado.title || '');
+            setPrecio(productoEditado.precio ?? productoEditado.price ?? '');
+            setDescripcion(productoEditado.descripcion || productoEditado.description || '');
+            setCategoria(productoEditado.categoria || productoEditado.category || '');
+            setImagen(productoEditado.imagen || productoEditado.image || '');
         } else {
             resetForm();
         }
     }, [productoEditado]);
     
     const resetForm = () => {
-        setTitle('');
-        setPrice('');
-        setDescription('');
-        setCategory('');
-        setImage('');
+        setNombre('');
+        setPrecio('');
+        setDescripcion('');
+        setCategoria('');
+        setImagen('');
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const precioNumerico = Number(precio);
         const nuevoProducto = {
-            title,
-            price,
-            description,
-            category,
-            image};
+            nombre,
+            precio: Number.isNaN(precioNumerico) ? 0 : precioNumerico,
+            descripcion,
+            categoria,
+            imagen,
+            title: nombre,
+            price: Number.isNaN(precioNumerico) ? 0 : precioNumerico,
+            description: descripcion,
+            category: categoria,
+            image: imagen,
+        };
         try {
             if (productoEditado) {
-                const response = await api.put(`/products/${productoEditado.id}`, nuevoProducto);
+                let response;
+                try {
+                    response = await api.put(`/productos/${productoEditado.id}`, nuevoProducto);
+                } catch {
+                    response = await api.put(`/products/${productoEditado.id}`, nuevoProducto);
+                }
                 console.log('Producto actualizado:', response.data);
                 alert('Producto actualizado exitosamente');
                 limpiarSeleccion();
             } else {
-                const response = await api.post('/products', nuevoProducto);
+                let response;
+                try {
+                    response = await api.post('/productos', nuevoProducto);
+                } catch {
+                    response = await api.post('/products', nuevoProducto);
+                }
                 console.log('Producto registrado:', response.data);
                 alert('Producto registrado exitosamente');
                 limpiarSeleccion();
@@ -62,29 +79,29 @@ function RegistrarProducto({productoEditado, limpiarSeleccion, onActualizacionEx
 
         return (
             <div className="registroDiv">
-                <h2>Registrar Producto</h2>
+                <h2>{productoEditado ? 'Editar Producto' : 'Registrar Producto'}</h2>
                 <form onSubmit={handleSubmit} className="formularioRegistro">
                     <div className="campoFormulario">
                         <label> Nombre:</label>
-                        <input type="text" name="title" value={title} onChange={(e) => setTitle(e.target.value)} required />
+                        <input type="text" name="nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} required />
                     </div>
                     <div className="campoFormulario">
                         <label> Precio:</label>
-                        <input type="number" name="price" value={price} onChange={(e) => setPrice(e.target.value)} required />
+                        <input type="number" name="precio" value={precio} onChange={(e) => setPrecio(e.target.value)} required />
                     </div>
                     <div className="campoFormulario">
                         <label> Descripción:</label>
-                        <input type="text" name="description" value={description} onChange={(e) => setDescription(e.target.value)} required />
+                        <input type="text" name="descripcion" value={descripcion} onChange={(e) => setDescripcion(e.target.value)} required />
                     </div>
                     <div className="campoFormulario">
                         <label> Categoría:</label>
-                        <input type="text" name="category" value={category} onChange={(e) => setCategory(e.target.value)} required />
+                        <input type="text" name="categoria" value={categoria} onChange={(e) => setCategoria(e.target.value)} required />
                     </div>
                     <div className="campoFormulario">
                         <label> Imagen </label>
-                        <input type="text" name="image" value={image} onChange={(e) => setImage(e.target.value)} required />
+                        <input type="text" name="imagen" value={imagen} onChange={(e) => setImagen(e.target.value)} required />
                     </div>
-                    <button type="submit" className="btnRegistro">Registrar</button>
+                    <button type="submit" className="btnRegistro">{productoEditado ? 'Actualizar' : 'Registrar'}</button>
                 </form>
             </div>
         )
