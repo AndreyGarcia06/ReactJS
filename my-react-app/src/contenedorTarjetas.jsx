@@ -14,7 +14,7 @@ import Categorias from "./Categorias";
 import { useAuth } from "./AuthContext";
 
 function ContenedorTarjeta ({vista, cambiarVista}) {
-    const { isLoggedIn } = useAuth();
+    const { isLoggedIn, isAdmin } = useAuth();
 
     const vistas = {
         "Inicio": <Inicio />,
@@ -26,8 +26,8 @@ function ContenedorTarjeta ({vista, cambiarVista}) {
         "Usuarios": <Usuarios />,
         "Categorias": isLoggedIn ? <Categorias /> : <Inicio />,
         "Login": <Login cambiarVista={cambiarVista} />,
-        "RegistrarUsuario": <RegistrarUsuario />,
-        "Carrito": <Carrito />
+        "RegistrarUsuario": isAdmin ? <RegistrarUsuario /> : <Inicio />,
+        "Carrito": isLoggedIn ? <Carrito /> : <Inicio />
 
     }
     return ( 

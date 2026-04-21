@@ -2,8 +2,10 @@ import {useEffect, useState} from 'react';
 import api from './Services/api';
 import './Usuarios.css';
 import RegistrarUsuario from './RegistrarUsuario';
+import { useAuth } from './AuthContext';
 
 function Usuarios () {
+  const { isAdmin } = useAuth();
   const [usuarios, setUsuarios] = useState([]);
   const [cargando, setCargando] = useState (true);
   const [usuarioSeleccionado, setUsuarioSeleccionado] = useState(null);
@@ -16,13 +18,12 @@ function Usuarios () {
   };
 
   const obtenerUsuarios = async () => {
+      if (!isAdmin) {
+        setCargando(false);
+        return;
+      }
       try {
-        let response;
-        try {
-          response = await api.get('/usuarios');
-        } catch {
-          response = await api.get('/users');
-        }
+        const response = await api.get('/usuarios');
         setUsuarios(Array.isArray(response.data) ? response.data : []);
       }catch( error) {
         console.error ('Error al obtener usuario:', error);
@@ -55,6 +56,10 @@ function Usuarios () {
   }, []);
 
   if(cargando) return <p> Cargando usuarios ...</p>
+
+  if (!isAdmin) {
+    return <div className="usuariosDiv"><h3 className="usuariosTitulo">Acceso restringido</h3><p>Solo un administrador puede ver y administrar usuarios.</p></div>;
+  }
 
     return (
         <>

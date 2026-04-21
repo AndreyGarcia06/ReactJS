@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "./Services/api";
 import "./Categorias.css";
 
 function Categorias() {
@@ -10,8 +10,24 @@ function Categorias() {
     useEffect(() => {
         const obtenerCategorias = async () => {
             try {
-                const response = await axios.get("https://www.themealdb.com/api/json/v1/1/categories.php");
-                setCategorias(response.data.categories || []);
+                const [categoriasResponse, productosResponse] = await Promise.all([
+                    api.get("/categorias"),
+                    api.get("/productos"),
+                ]);
+
+                const productos = Array.isArray(productosResponse.data) ? productosResponse.data : [];
+                const categoriasApi = Array.isArray(categoriasResponse.data) ? categoriasResponse.data : [];
+
+                const categoriasConImagen = categoriasApi.map((categoria) => {
+                    const productoRelacionado = productos.find((producto) => String(producto.id_categoria) === String(categoria.id));
+                    return {
+                        ...categoria,
+                        imagen: productoRelacionado?.image || productoRelacionado?.imagen || "",
+                        productos: productos.filter((producto) => String(producto.id_categoria) === String(categoria.id)).length,
+                    };
+                });
+
+                setCategorias(categoriasConImagen);
             } catch (err) {
                 console.error("Error al obtener las categorías:", err);
                 setError("No se pudieron cargar las categorías en este momento.");
@@ -33,22 +49,24 @@ function Categorias() {
 
     return (
         <div className="categoriasDiv">
-            <h3 className="categoriasTitulo">Categorías de comidas</h3>
+            <h3 className="categoriasTitulo">Categorías de la tienda</h3>
             <p className="categoriasDescripcion">
-                Comidas que se comen rico rico mmmm
+                Estas categorías se cargan desde la API del backend.
             </p>
 
             <div className="categoriasGrid">
                 {categorias.map((categoria) => (
-                    <article className="categoriaCard" key={categoria.idCategory}>
-                        <img
-                            src={categoria.strCategoryThumb}
-                            alt={categoria.strCategory}
-                            className="categoriaImagen"
-                        />
+                    <article className="categoriaCard" key={categoria.id}>
+                        {categoria.imagen ? (
+                            <img
+                                src={categoria.imagen}
+                                alt={categoria.nombre}
+                                className="categoriaImagen"
+                            />
+                        ) : null}
                         <div className="categoriaContenido">
-                            <h4>{categoria.strCategory}</h4>
-                            <p>{categoria.strCategoryDescription}</p>
+                            <h4>{categoria.nombre}</h4>
+                            <p>{categoria.productos} producto(s) relacionados</p>
                         </div>
                     </article>
                 ))}

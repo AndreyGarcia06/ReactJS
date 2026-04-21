@@ -29,7 +29,7 @@ function Logo() {
 }
 
 function Menu({cambiarVista}) {
-    const {isLoggedIn, logout} = useAuth();
+    const {isLoggedIn, isAdmin, logout} = useAuth();
     const handleLogout = () => {
         logout();
         cambiarVista ("Inicio");
@@ -46,8 +46,8 @@ function Menu({cambiarVista}) {
                 {isLoggedIn ? (
                     <>
                     <li onClick = {() => cambiarVista ("Categorias")}> Categorías </li>
-                    <li onClick = {() => cambiarVista ("Usuarios")}> Usuarios </li>
                     <li onClick = {() => cambiarVista ("Carrito")}> Carrito </li>
+                    {isAdmin && <li onClick = {() => cambiarVista ("Usuarios")}> Usuarios </li>}
                     <li onClick = {handleLogout}> Cerrar sesión </li>
                     </>):
                     (

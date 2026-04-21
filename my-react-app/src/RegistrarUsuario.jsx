@@ -1,25 +1,17 @@
 import { useEffect, useState } from 'react';
 import './RegistrarUsuario.css';
 import api from './Services/api'
+import { useAuth } from './AuthContext';
 
 function RegistrarUsuario({usuarioEditado, limpiarSeleccion, onActualizacionExitosa}) {
+    const { isAdmin } = useAuth();
 
     const [nombre, setNombre] = useState('');
     const [direccion, setDireccion] = useState('');
     const [telefono, setTelefono] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [rol, setRol] = useState('usuario');
-
-    const dividirNombre = (nombreCompleto) => {
-        const partes = String(nombreCompleto || '').trim().split(/\s+/).filter(Boolean);
-        if (partes.length === 0) return { firstname: '', lastname: '' };
-        if (partes.length === 1) return { firstname: partes[0], lastname: '' };
-        return {
-            firstname: partes[0],
-            lastname: partes.slice(1).join(' '),
-        };
-    };
+    const [rol, setRol] = useState('cliente');
 
     useEffect(() => {
         if (usuarioEditado) {
@@ -35,7 +27,7 @@ function RegistrarUsuario({usuarioEditado, limpiarSeleccion, onActualizacionExit
             setTelefono(usuarioEditado.telefono || usuarioEditado.phone || '');
             setEmail(usuarioEditado.email || '');
             setPassword(usuarioEditado.password || '');
-            setRol(usuarioEditado.rol || usuarioEditado.role || 'usuario');
+            setRol(usuarioEditado.rol || usuarioEditado.role || 'cliente');
         } else {
             resetForm();
         }
@@ -47,33 +39,20 @@ function RegistrarUsuario({usuarioEditado, limpiarSeleccion, onActualizacionExit
         setTelefono('');
         setEmail('');
         setPassword('');
-        setRol('usuario');
+        setRol('cliente');
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const { firstname, lastname } = dividirNombre(nombre);
 
         const nuevoUsuario = {
-            username: nombre,
             nombre,
             direccion,
             telefono,
             email,
             password,
             rol,
-            role: rol,
-            phone: telefono,
-            name: {
-                firstname,
-                lastname,
-            },
-            address: {
-                street: direccion,
-                number: '',
-                city: '',
-            },
-            fechaRegistro: usuarioEditado?.fechaRegistro || new Date().toISOString(),
+            fecha_registro: usuarioEditado?.fecha_registro || usuarioEditado?.fechaRegistro || new Date().toISOString(),
         };
 
         try {
@@ -108,6 +87,10 @@ function RegistrarUsuario({usuarioEditado, limpiarSeleccion, onActualizacionExit
         }
     };
 
+    if (!isAdmin) {
+        return <div className="registroDiv"><h2>Acceso restringido</h2><p>Solo un administrador puede registrar o editar usuarios.</p></div>;
+    }
+
     return (
         <div className="registroDiv">
             <h2>{usuarioEditado ? 'Editar Usuario' : 'Registrar Usuario'}</h2>
@@ -135,7 +118,7 @@ function RegistrarUsuario({usuarioEditado, limpiarSeleccion, onActualizacionExit
                 <div className="campoFormulario">
                     <label> Rol:</label>
                     <select name="rol" value={rol} onChange={(e) => setRol(e.target.value)}>
-                        <option value="usuario">Usuario</option>
+                        <option value="cliente">Cliente</option>
                         <option value="admin">Admin</option>
                     </select>
                 </div>
